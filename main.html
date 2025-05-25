@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cat Café Voice Agent with Chat Button</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(to top, #ffb347, #ffcc33);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #agent-container {
+      width: 650px;
+      height: 700px;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Floating chat button style */
+    #chat-open-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      z-index: 9999;
+      padding: 0;
+    }
+
+    #chat-open-btn img {
+      width: 60px;
+      height: 60px;
+      user-select: none;
+      pointer-events: none;
+    }
+  </style>
+
+  <!-- OmniDimension widget script -->
+  <script
+    id="omnidimension-web-widget"
+    async
+    src="https://backend.omnidim.io/web_widget.js?secret_key=5000e96ccdf43b3f19ed3b8dc9af0c80"
+  ></script>
+</head>
+<body>
+  <div id="agent-container">
+    <!-- Optional: your themed agent UI here -->
+  </div>
+
+  <!-- Floating chat button -->
+  <button id="chat-open-btn" aria-label="Open Chat">
+    <img src="https://pluginicons.craft-cdn.com/chat-widget.svg?1621554798" alt="Chat Icon" />
+  </button>
+
+  <script>
+    // Wait until OmniDimension widget script has loaded
+    function waitForOmniDimensionWidget(callback) {
+      if (window.OmniDimension && window.OmniDimension.widget) {
+        callback();
+      } else {
+        setTimeout(() => waitForOmniDimensionWidget(callback), 100);
+      }
+    }
+
+    waitForOmniDimensionWidget(() => {
+      const btn = document.getElementById('chat-open-btn');
+      btn.addEventListener('click', () => {
+        
+        window.OmniDimension.widget.open();
+      });
+    });
+  </script>
+</body>
+</html>
