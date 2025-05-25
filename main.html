@@ -2,62 +2,112 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Cat Café Voice Agent with Chat Button</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Whisker's Assistant</title>
   <style>
     body {
       margin: 0;
+      padding: 0;
       height: 100vh;
-      background: linear-gradient(to top, #ffb347, #ffcc33);
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to top right, #ffd7c2, #fff0f0);
+      font-family: 'Georgia', serif;
       display: flex;
       justify-content: center;
       align-items: center;
       overflow: hidden;
-      position: relative;
     }
 
-    #agent-container {
-      width: 650px;
-      height: 700px;
-      background: rgba(255, 255, 255, 0.85);
-      border-radius: 12px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    .cafe-scene {
       position: relative;
-      overflow: hidden;
+      width: 100%;
+      height: 100%;
+      background: url('https://images.app.goo.gl/5FDw9yJBCQksSYwo6') center/cover no-repeat;
     }
 
-    /* Floating chat button style */
+    .window-view {
+      position: absolute;
+      right: 20%;
+      top: 20%;
+      width: 200px;
+      height: 200px;
+      opacity: 0.9;
+    }
+
+    .cat {
+      position: absolute;
+      bottom: 0;
+      right: 20%;
+      width: 180px;
+      height: 180px;
+    }
+
+    h1 {
+      color: #4d2c19;
+      background-color: rgba(255, 248, 240, 0.6);
+      padding: 20px;
+      border-radius: 16px;
+    }
+
+    /* Chat Button */
     #chat-open-btn {
       position: fixed;
       bottom: 30px;
       right: 30px;
+      width: 64px;
+      height: 64px;
+      background: none;
       border: none;
-      background: transparent;
       cursor: pointer;
       z-index: 9999;
-      padding: 0;
     }
 
     #chat-open-btn img {
-      width: 60px;
-      height: 60px;
-      user-select: none;
-      pointer-events: none;
+      width: 100%;
+      height: 100%;
+    }
+
+    .ai-facts {
+        background-color: rgba(240, 250, 255, 0.85);
+        padding: 20px;
+        margin: 20px auto;
+        border-radius: 16px;
+        width: 70%;
+        color: #1d3557;
+        font-size: 16px;
+        box-shadow: 0 0 12px rgba(0, 0, 0, 0.07);
+    }
+    
+    .ai-facts h2 {
+        margin-top: 0;
+        font-size: 22px;
+        text-align: right;
     }
   </style>
 
-  <!-- OmniDimension widget script -->
+  <!-- Your OmniDimension Widget Script -->
   <script
     id="omnidimension-web-widget"
     async
-    src="https://backend.omnidim.io/web_widget.js?secret_key=5000e96ccdf43b3f19ed3b8dc9af0c80"
+    src="https://backend.omnidim.io/web_widget.js?secret_key=47fd1c17fc4b929b89a60486fbebe438"
   ></script>
 </head>
 <body>
-  <div id="agent-container">
-    <!-- Optional: your themed agent UI here -->
+  <div class="cafe-scene">
+    <h1>Welcome to the Whisker's ☕🤖</h1>
+    <div class="window-view"></div>
+    <div class="cat"></div>
   </div>
+
+  <div class="ai-facts">
+  <h2> Cool AI Facts</h2>
+  <ul>
+    <li>AI makes art, music, and stories.</li>
+    <li>Some AI can spot diseases early.</li>
+    <li>"AI" was first used in 1956.</li>
+    <li>AI beats humans at chess and Go.</li>
+    <li>Voice assistants run on AI.</li>
+  </ul>
+</div>
 
   <!-- Floating chat button -->
   <button id="chat-open-btn" aria-label="Open Chat">
@@ -65,22 +115,18 @@
   </button>
 
   <script>
-    // Wait until OmniDimension widget script has loaded
-    function waitForOmniDimensionWidget(callback) {
-      if (window.OmniDimension && window.OmniDimension.widget) {
-        callback();
+    // Ensure widget is ready before opening
+    function waitForWidget() {
+      if (window.OmniDimension && window.OmniDimension.widget?.open) {
+        document.getElementById('chat-open-btn').addEventListener('click', () => {
+          window.OmniDimension.widget.open();
+        });
       } else {
-        setTimeout(() => waitForOmniDimensionWidget(callback), 100);
+        setTimeout(waitForWidget, 300);
       }
     }
 
-    waitForOmniDimensionWidget(() => {
-      const btn = document.getElementById('chat-open-btn');
-      btn.addEventListener('click', () => {
-        
-        window.OmniDimension.widget.open();
-      });
-    });
+    waitForWidget();
   </script>
 </body>
 </html>
