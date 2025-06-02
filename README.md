@@ -7,8 +7,7 @@ A chatbot designed with a soft theme and simple interface. Built using OmniDimen
 2. Click the chat icon to open the AI assistant.<br/>
 
 ## 🧠 What It Does
-- Launches a polite AI voice assistant using OmniDimension's web widget.<br/>
-- Shares bite-sized, interesting facts about AI on a soft café-style page.<br/>
+- Launches a chatbot using OmniDimension's web widget.<br/>
 - Uses simple HTML and CSS – beginner friendly and customizable.<br/>
 
 ## ⚙️ OmniDimension Integration
